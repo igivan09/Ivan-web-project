@@ -2689,13 +2689,12 @@ section {
 
 
 
-/* FIX: Header Scrolled Link Colors */
-.header.scrolled .nav-link {
-    color: var(--carbon-base) !important;
-}
-.header.scrolled .nav-link:hover {
-    color: var(--primary) !important;
-}
-.header.scrolled .mobile-menu-btn span {
-    background-color: var(--carbon-base) !important;
+/* FIX: Header Scrolled Link Colors (Desktop Only) */
+@media (min-width: 1024px) {
+    .header.scrolled .nav-link {
+        color: var(--carbon-base) !important;
+    }
+    .header.scrolled .nav-link:hover {
+        color: var(--primary) !important;
+    }
 }
