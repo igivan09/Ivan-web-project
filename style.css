@@ -3127,3 +3127,155 @@ section {
     box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4) !important;
 }
 
+/* --- COMPREHENSIVE A-Z MOBILE RESPONSIVENESS (ADDED) --- */
+html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    position: relative;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    max-width: 100%;
+    overflow-x: hidden;
+    padding-left: clamp(15px, 4vw, 24px);
+    padding-right: clamp(15px, 4vw, 24px);
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    /* Typography Fixes */
+    .hero-title {
+        font-size: clamp(32px, 9vw, 48px) !important;
+        word-wrap: break-word;
+        hyphens: auto;
+        padding: 0 10px;
+    }
+    
+    .section-title {
+        font-size: clamp(28px, 7vw, 36px) !important;
+        word-wrap: break-word;
+    }
+    
+    /* Layout & Overflow Fixes */
+    .hero-grid {
+        gap: 20px !important;
+        padding: 0 10px;
+    }
+    
+    .packages-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .package-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        min-width: 0 !important;
+        overflow: hidden;
+    }
+
+    .package-body {
+        margin-left: 0 !important;
+        padding: 30px 20px 20px 20px !important;
+    }
+    
+    .package-img {
+        width: calc(100% + 40px) !important;
+        margin-left: -20px !important;
+        margin-right: -20px !important;
+    }
+
+    .package-label {
+        margin-left: 0 !important;
+        transform: translateY(50%) translateX(15px) !important;
+    }
+    
+    .secondary-course-card {
+        padding: 24px 15px !important;
+        margin: 0 !important;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .secondary-img {
+        width: calc(100% + 30px) !important;
+        margin-left: -15px !important;
+        margin-right: -15px !important;
+    }
+
+    /* Buttons Stacking on Mobile */
+    div[style*="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.5rem;"] {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    
+    div[style*="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.5rem;"] > a,
+    .hero-actions .btn {
+        width: 100% !important;
+        flex: none !important;
+        margin: 0 !important;
+        padding: 14px 20px !important;
+        text-align: center;
+        justify-content: center;
+    }
+
+    /* Grid & Forms */
+    .grid-2, .grid-3 {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .highfi-trust-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Warning Text Fix */
+    .text-center[style*="max-width: 800px"] {
+        padding: 20px 15px !important;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+        word-wrap: break-word;
+    }
+    
+    /* Footer Fixes */
+    .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .group-logo-accreditation {
+        align-items: center !important;
+    }
+    
+    .trust-logos {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-container {
+        padding: 0 15px;
+    }
+    
+    .logo-img-header {
+        height: 60px !important;
+        padding: 4px 8px !important;
+    }
+}
+
