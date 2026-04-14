@@ -316,8 +316,8 @@ img {
     transition: var(--transition);
     /* Transform the harsh white background into a sleek badge */
     background-color: #ffffff;
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 6px 12px;
+    border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
     object-fit: contain;
 }
@@ -466,9 +466,9 @@ img {
     }
 
     .logo-img-header {
-        height: 120px;
-        padding: 12px 24px;
-        border-radius: 28px;
+        height: 90px;
+        padding: 8px 16px;
+        border-radius: 14px;
     }
 }
 
@@ -3282,8 +3282,9 @@ img, video, canvas, svg {
     }
     
     .logo-img-header {
-        height: 60px !important;
+        height: 56px !important;
         padding: 4px 8px !important;
+        border-radius: 10px !important;
     }
 }
 
