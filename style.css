@@ -1290,6 +1290,7 @@ img {
     align-items: center;
     justify-content: center;
     gap: 12px;
+    flex-wrap: wrap; /* Ensure badges can wrap on very small screens */
 }
 
 @media (min-width: 992px) {
@@ -1659,6 +1660,7 @@ textarea.input-field {
     margin-bottom: 16px;
     font-size: 16px;
     color: var(--charcoal-deep);
+    word-break: break-word; /* Prevent text overflow */
 }
 
 .icon-check {
@@ -3134,6 +3136,12 @@ html, body {
     max-width: 100vw !important;
     position: relative;
     box-sizing: border-box;
+}
+
+/* Global overflow wraps */
+p, h1, h2, h3, h4, h5, h6, span, a, li {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 *, *::before, *::after {
