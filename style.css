@@ -3288,3 +3288,52 @@ img, video, canvas, svg {
     }
 }
 
+/* ICU Monitor Heartbeat Animation */
+.logo, .footer-col .mb-3 {
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 12px;
+    padding: 6px 0; /* Extra space for heartbeat translateY(-5px) */
+    margin: -6px 0; /* Offset padding to maintain original layout spacing */
+}
+
+.logo::after, .footer-col .mb-3::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -20px;
+    width: 3px;
+    background: #00E5FF;
+    box-shadow: 0 0 15px 3px rgba(0, 229, 255, 0.9),
+                0 0 30px 8px rgba(0, 229, 255, 0.5);
+    animation: icuSweep 2.5s infinite linear;
+    z-index: 10;
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+.logo-animated {
+    animation: icuHeartbeat 2.5s infinite;
+    transform-origin: center;
+}
+
+@keyframes icuSweep {
+    0% { left: -10%; opacity: 0; }
+    5% { opacity: 1; }
+    40% { left: 110%; opacity: 1; }
+    45% { opacity: 0; left: 110%; }
+    100% { opacity: 0; left: 110%; }
+}
+
+@keyframes icuHeartbeat {
+    0% { transform: scale(1); }
+    10% { transform: scale(1); }
+    12% { transform: scale(1.1) translateY(-5px); }
+    15% { transform: scale(0.9) translateY(2px); }
+    17% { transform: scale(1.05) translateY(-2px); }
+    20% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
