@@ -3337,3 +3337,10 @@ img, video, canvas, svg {
     100% { transform: scale(1); }
 }
 
+
+/* Header Search Styles */
+.header-search-container { display: none !important; }
+@media (min-width: 1024px) { .header-search-container { display: block !important; margin: 0 20px; } }
+.header-search-container input:focus { border-color: #2563EB !important; box-shadow: 0 0 0 4px rgba(37,99,235,0.1) !important; }
+@media (max-width: 768px) { #promo-banner { padding: 12px 30px !important; } #promo-banner p { font-size: 0.8rem !important; } }
+

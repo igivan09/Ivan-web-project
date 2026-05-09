@@ -14,38 +14,286 @@
     <script src="script.js" defer></script>
     
     
-</head>
-<body>
-    <header class="header">
-        <div class="header-container">
-            <div class="nav-brand">
+    <style>
+        /* Responsive Search Layout Override */
+        .header {
+            overflow: visible !important;
+            overflow-x: visible !important;
+            overflow-y: visible !important;
+        }
+        
+        .header-search-container {
+            display: block !important;
+            flex: 1;
+            order: 2;
+            margin: 0 10px;
+        }
+        .nav-brand { order: 1; }
+        .mobile-menu-btn { order: 3; }
+        .nav { order: 4; }
+        
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-top: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            display: none;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+        .search-suggestion-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f1f5f9;
+            color: #1e293b;
+            text-align: left;
+        }
+        .search-suggestion-item:last-child { border-bottom: none; }
+        .search-suggestion-item:hover { background: #f8fafc; }
+        .search-suggestion-title { font-weight: 500; font-size: 0.95rem; }
+        .search-suggestion-type { font-size: 0.75rem; color: #64748b; background: #f1f5f9; padding: 4px 8px; border-radius: 6px; font-weight: 500; }
+        
+        @media (max-width: 1024px) {
+            .logo-img-header {
+                height: 45px !important;
+                padding: 4px 8px !important;
+            }
+            .header-search-container input {
+                padding: 10px 15px 10px 35px !important;
+                font-size: 0.85rem !important;
+            }
+            .header-search-container svg {
+                left: 12px !important;
+                width: 15px !important;
+                height: 15px !important;
+            }
+            .header-container {
+                gap: 5px !important;
+                padding: 10px 15px !important;
+            }
+            .nav-brand {
+                margin-right: 5px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .header-search-container {
+                width: auto;
+                flex: 1;
+                margin-top: 0;
+            }
+            .nav { order: 3; }
+        }
+    </style>
+    <header class="header" id="main-header" style="padding: 0;">
+        <!-- Top Promotional Banner -->
+        <div id="promo-banner" style="background-color: #A5E4E8; text-align: center; padding: 12px 40px; position: relative;">
+            <p style="margin: 0; color: #1e293b; font-weight: 500; font-size: 0.95rem;">Train your Phlebotomy training in a London based NHS practise</p>
+            <button onclick="document.getElementById('promo-banner').style.display='none'" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #1e293b; line-height: 1;">&times;</button>
+        </div>
+
+        <div class="header-container" style="max-width: 100%; padding: 12px clamp(20px, 4vw, 60px); display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: nowrap;">
+            <div class="nav-brand" style="display: flex; align-items: center; width: auto !important; flex-shrink: 0;">
                 <a href="#home" class="logo">
                     <img src="assets/brand-logo.png" alt="The Phlebotomy Trainer" class="logo-img-header logo-animated">
                 </a>
-                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
             </div>
+
+            <!-- Search Bar -->
+            <div class="header-search-container" style="max-width: 600px;">
+                <div style="position: relative; width: 100%;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1c1d1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); opacity: 0.7;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="site-search" placeholder="Search for anything" onkeydown="handleSearch(event)" style="width: 100%; padding: 14px 20px 14px 45px; border-radius: 999px; border: 1px solid #1c1d1f; font-size: 0.95rem; background-color: #f7f9fa; color: #1c1d1f; outline: none; box-shadow: none; transition: background-color 0.3s;">
+                </div>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu" style="margin-left: auto;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <nav class="nav" id="nav">
                 <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">&times;</button>
-                <ul class="nav-list">
+                <ul class="nav-list" style="align-items: center;">
                     <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#gp-training" class="nav-link">GP based training</a></li>
                     <li><a href="#services" class="nav-link">Courses</a></li>
+                    <li><a href="#gp-training" class="nav-link">Our Training</a></li>
                     <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
                     <li><a href="#about" class="nav-link">Our Story</a></li>
                     <li><a href="#blog" class="nav-link">Blog</a></li>
-                    <li><a href="#funding" class="nav-link">Funding</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <script>
+        const searchIndex = [
+            { title: "Theory Only Package", type: "Course", url: "#services" },
+            { title: "Entry Package", type: "Course", url: "#services" },
+            { title: "Standard Package", type: "Course", url: "#services" },
+            { title: "Premium Package", type: "Course", url: "#services" },
+            { title: "Competency Package", type: "Course", url: "#services" },
+            { title: "GP Surgery Training", type: "Training", url: "#gp-training" },
+            { title: "Real Patient Interaction", type: "Feature", url: "#home" },
+            { title: "Student Testimonials", type: "Reviews", url: "#testimonials" },
+            { title: "Our Story", type: "About Us", url: "#about" },
+            { title: "Phlebotomy Blog", type: "Articles", url: "#blog" },
+            { title: "Contact Us", type: "Support", url: "#contact" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('site-search');
+            if (!searchInput) return;
+
+            const suggestionsBox = document.createElement('div');
+            suggestionsBox.className = 'search-suggestions';
+            searchInput.parentNode.appendChild(suggestionsBox);
+
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                suggestionsBox.innerHTML = '';
+                
+                if (query.length < 2) {
+                    suggestionsBox.style.display = 'none';
+                    return;
+                }
+                
+                const matches = searchIndex.filter(item => 
+                    item.title.toLowerCase().includes(query) || 
+                    item.type.toLowerCase().includes(query)
+                );
+                
+                if (matches.length > 0) {
+                    matches.forEach(match => {
+                        const div = document.createElement('div');
+                        div.className = 'search-suggestion-item';
+                        div.innerHTML = `
+                            <span class="search-suggestion-title">${match.title}</span>
+                            <span class="search-suggestion-type">${match.type}</span>
+                        `;
+                        div.onmousedown = (e) => {
+                            e.preventDefault();
+                            window.location.hash = match.url;
+                            suggestionsBox.style.display = 'none';
+                            searchInput.value = '';
+                        };
+                        suggestionsBox.appendChild(div);
+                    });
+                    suggestionsBox.style.display = 'block';
+                } else {
+                    suggestionsBox.style.display = 'none';
+                }
+            });
+
+            searchInput.addEventListener('blur', () => {
+                suggestionsBox.style.display = 'none';
+            });
+
+            searchInput.addEventListener('focus', function() {
+                if (this.value.trim().length >= 2 && suggestionsBox.children.length > 0) {
+                    suggestionsBox.style.display = 'block';
+                }
+            });
+        });
+
+        function handleSearch(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const query = event.target.value.toLowerCase().trim();
+                const match = searchIndex.find(item => 
+                    item.title.toLowerCase().includes(query) || 
+                    item.type.toLowerCase().includes(query)
+                );
+                
+                if (match) {
+                    window.location.hash = match.url;
+                    event.target.value = '';
+                } else if (query) {
+                    const found = window.find(query, false, false, true, false, true, false);
+                    if (!found) {
+                        alert("No exact matches found for: '" + query + "'");
+                    }
+                }
+                
+                const box = event.target.parentNode.querySelector('.search-suggestions');
+                if (box) box.style.display = 'none';
+            }
+        }
+
+        // --- Slider Logic ---
+        let currentSlideIdx = 0;
+        let slideInterval;
+        const totalSlides = 5;
+
+        function updateSlider() {
+            const track = document.getElementById('hero-slider');
+            const dots = document.querySelectorAll('#hero-slider-dots .dot');
+            if(track) track.style.transform = `translateX(-${currentSlideIdx * 100}%)`;
+            
+            dots.forEach((dot, index) => {
+                dot.style.background = index === currentSlideIdx ? 'white' : 'rgba(255,255,255,0.4)';
+            });
+        }
+
+        function moveSlide(dir) {
+            currentSlideIdx = (currentSlideIdx + dir + totalSlides) % totalSlides;
+            updateSlider();
+            resetInterval();
+        }
+
+        function currentSlide(idx) {
+            currentSlideIdx = idx;
+            updateSlider();
+            resetInterval();
+        }
+
+        function startSlideShow() {
+            slideInterval = setInterval(() => {
+                moveSlide(1);
+            }, 5000); // 5 seconds automatic swipe
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startSlideShow();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            startSlideShow();
+            
+            const track = document.getElementById('hero-slider');
+            if(track) {
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                track.addEventListener('touchstart', e => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    clearInterval(slideInterval);
+                }, {passive: true});
+                
+                track.addEventListener('touchend', e => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    if (touchEndX < touchStartX - 40) moveSlide(1);
+                    if (touchEndX > touchStartX + 40) moveSlide(-1);
+                    startSlideShow();
+                }, {passive: true});
+            }
+        });
+    </script>
+
     <main>
-        <section class="hero bg-carbon" id="home">
+        <section class="hero bg-carbon" id="home" style="overflow: visible !important;">
             <div class="grain-overlay"></div>
             <div class="container hero-grid">
                 <div class="hero-content fade-in">
@@ -64,8 +312,27 @@
                     </div>
                 </div>
                 <div class="hero-media fade-in delay-1">
-                    <div class="squircle-wrapper">
-                        <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=1129,fit=crop/YrD6qGn0jKU96GQP/1-d9539J5wWoFOaLlJ.jpg" alt="Phlebotomy Specialist Training" class="hero-image-squircle">
+                    <div class="slider-container hero-image-squircle" style="position: relative; overflow: hidden; width: 100%; aspect-ratio: 1/1; border-radius: 24px; box-shadow: 0 10px 30px rgba(0, 229, 255, 0.15); background: #0f172a;">
+                        <div class="slider-track" id="hero-slider" style="display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out;">
+                            <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=1129,fit=crop/YrD6qGn0jKU96GQP/1-d9539J5wWoFOaLlJ.jpg" class="slide-img" style="width: 100%; height: 100%; object-fit: cover; object-position: top; flex-shrink: 0;" alt="Phlebotomy Specialist Training">
+                            <img src="assets/slider-1.jpg" class="slide-img" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;" alt="Phlebotomy Classroom Theory">
+                            <img src="assets/slider-2.jpg" class="slide-img" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;" alt="Phlebotomy Hands-On Practice">
+                            <img src="assets/slider-3.jpg" class="slide-img" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;" alt="Phlebotomy Practical Assessment">
+                            <img src="assets/slider-4.jpg" class="slide-img" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;" alt="Phlebotomy Professional Training">
+                        </div>
+                        <button class="slider-btn prev" onclick="moveSlide(-1)" style="position: absolute; top: 50%; left: 15px; transform: translateY(-50%); background: rgba(15,23,42,0.6); color: white; border: 1px solid rgba(255,255,255,0.2); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; backdrop-filter: blur(4px); transition: background 0.3s;" onmouseover="this.style.background='rgba(34,211,238,0.8)'" onmouseout="this.style.background='rgba(15,23,42,0.6)'">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                        </button>
+                        <button class="slider-btn next" onclick="moveSlide(1)" style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); background: rgba(15,23,42,0.6); color: white; border: 1px solid rgba(255,255,255,0.2); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; backdrop-filter: blur(4px); transition: background 0.3s;" onmouseover="this.style.background='rgba(34,211,238,0.8)'" onmouseout="this.style.background='rgba(15,23,42,0.6)'">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                        </button>
+                        <div class="slider-dots" id="hero-slider-dots" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10;">
+                            <span class="dot active" onclick="currentSlide(0)" style="width: 12px; height: 12px; background: white; border-radius: 50%; cursor: pointer; box-shadow: 0 0 4px rgba(0,0,0,0.5); transition: background 0.3s;"></span>
+                            <span class="dot" onclick="currentSlide(1)" style="width: 12px; height: 12px; background: rgba(255,255,255,0.4); border-radius: 50%; cursor: pointer; box-shadow: 0 0 4px rgba(0,0,0,0.5); transition: background 0.3s;"></span>
+                            <span class="dot" onclick="currentSlide(2)" style="width: 12px; height: 12px; background: rgba(255,255,255,0.4); border-radius: 50%; cursor: pointer; box-shadow: 0 0 4px rgba(0,0,0,0.5); transition: background 0.3s;"></span>
+                            <span class="dot" onclick="currentSlide(3)" style="width: 12px; height: 12px; background: rgba(255,255,255,0.4); border-radius: 50%; cursor: pointer; box-shadow: 0 0 4px rgba(0,0,0,0.5); transition: background 0.3s;"></span>
+                            <span class="dot" onclick="currentSlide(4)" style="width: 12px; height: 12px; background: rgba(255,255,255,0.4); border-radius: 50%; cursor: pointer; box-shadow: 0 0 4px rgba(0,0,0,0.5); transition: background 0.3s;"></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -305,6 +572,15 @@
                 <div class="section-header text-center mb-5 fade-in">
                     <h2 class="section-title">Google Reviews</h2>
                     <p class="section-desc">Join the thousands of healthcare professionals who have trusted us with their phlebotomy journey.</p>
+                    
+                    <div class="mt-4 pt-3">
+                        <p class="text-sm mb-3 opacity-80" style="color: var(--carbon-base); font-weight: 600; font-size: 1.2rem;">Organizations we have supported</p>
+                        <div class="trust-logos-partners" style="display: flex; justify-content: center; gap: clamp(30px, 6vw, 80px); align-items: center; flex-wrap: wrap; margin-top: 20px;">
+                            <img src="assets/tower_hamlets_logo.png" alt="Tower Hamlets" style="height: clamp(60px, 12vw, 140px); max-width: 100%; object-fit: contain;">
+                            <img src="assets/westminster_logo.png" alt="City of Westminster" style="height: clamp(70px, 13vw, 150px); max-width: 100%; object-fit: contain;">
+                            <img src="assets/dwp_logo.png" alt="Department for Work and Pensions" style="height: clamp(55px, 10vw, 120px); max-width: 100%; object-fit: contain;">
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="grid grid-3">
