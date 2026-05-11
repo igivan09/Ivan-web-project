@@ -533,7 +533,7 @@ img {
 
 .hero-text {
     font-size: 18px;
-    color: var(--text-main);
+    color: white;
     margin-bottom: 40px;
 }
 
@@ -1545,9 +1545,8 @@ textarea.input-field {
 
 /* Footer */
 .footer {
-    background-color: white;
-    color: var(--carbon-base);
-    border-top: 1px solid var(--border);
+    background-color: var(--carbon-base);
+    color: white;
 }
 
 .footer-logo {
@@ -2192,12 +2191,12 @@ img {
 }
 
 .hero-title {
-    color: var(--carbon-base) !important;
+    color: #FFFFFF !important;
     text-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
 }
 
 .hero-subtitle {
-    color: var(--text-main) !important;
+    color: #E2E8F0 !important;
     max-width: 600px;
 }
 
@@ -2411,12 +2410,12 @@ section {
 }
 
 .hero-title {
-    color: var(--carbon-base) !important;
+    color: #FFFFFF !important;
     text-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
 }
 
 .hero-subtitle {
-    color: var(--text-main) !important;
+    color: #E2E8F0 !important;
     max-width: 600px;
 }
 
